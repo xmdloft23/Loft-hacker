@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOFT X01 | DARK SIDE </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>LOFT X01</h1>
+            <div class="subtitle">advanced hacking and banning side really Evil mode</div>
+        </header>
+        
+        <div class="panel">
+            <div class="tab-container">
+                <div class="tab active" data-tab="basic">Basic</div>
+                <div class="tab" data-tab="advanced">Advanced</div>
+                <div class="tab" data-tab="proxy">Proxy</div>
+                <div class="tab" data-tab="terminal">Terminal</div>
+            </div>
+            
+            <div class="tab-content active" id="basic-tab">
+                <div class="form-group">
+                    <label for="url">VICTIM URL:</label>
+                    <input type="text" id="url" placeholder="https://example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="time">DURATION (SECONDS):</label>
+                    <input type="number" id="time" placeholder="60" min="1" value="60">
+                </div>
+                
+                <div class="form-group">
+                    <label for="intensity">INTENSITY: <span class="tooltip">(?)
+                        <span class="tooltiptext">Higher intensity uses more resources but may be more effective</span>
+                    </span></label>
+                    <select id="intensity">
+                        <option value="low">Low (4 threads)</option>
+                        <option value="medium" selected>Medium (8 threads)</option>
+                        <option value="high">High (16 threads)</option>
+                        <option value="extreme">Extreme (32 threads)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="advanced-tab">
+                <div class="form-group">
+                    <label for="method">ATTACK METHOD:</label>
+                    <select id="method">
+                        <option value="mixed" selected>Mixed Methods</option>
+                        <option value="get">GET Flood</option>
+                        <option value="post">POST Flood</option>
+                        <option value="head">HEAD Flood</option>
+                        <option value="random">Random Methods</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="delay">REQUEST DELAY (ms):</label>
+                    <input type="number" id="delay" placeholder="100" min="0" value="100">
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="enable-cookies" checked>
+                        ENABLE COOKIES/SESSION
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="enable-referers" checked>
+                        RANDOM REFERERS
+                    </label>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="proxy-tab">
+                <div class="form-group">
+                    <label for="proxy-list">PROXY LIST (IP:PORT, one per line):</label>
+                    <textarea id="proxy-list" rows="5" placeholder="192.168.1.1:8080\n103.145.45.33:3128"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="rotate-proxies" checked>
+                        ROTATE PROXIES
+                    </label>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="terminal-tab">
+                <div class="form-group">
+                    <label>LOFT TERMINAL:</label>
+                    <div id="console-terminal" style="height: 200px;"></div>
+                    <div class="terminal-line">
+                        <span id="terminal-prompt">root@shadow:~#</span>
+                        <input type="text" id="terminal-input" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            
+            <button id="startBtn">INITIATE ATTACK</button>
+            <button id="stopBtn" class="danger" disabled>ABORT</button>
+            <button id="generateScriptBtn">GENERATE NODE SCRIPT</button>
+            
+            <div class="progress-container hidden" id="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div id="status" class="info">STATUS: READY</div>
+        </div>
+        
+        <div class="panel">
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="reqCount">0</div>
+                    <div class="stat-label">Requests</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="successCount">0</div>
+                    <div class="stat-label">Success</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="errorCount">0</div>
+                    <div class="stat-label">Errors</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="rpsCount">0</div>
+                    <div class="stat-label">Req/Sec</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="workersCount">0</div>
+                    <div class="stat-label">Threads</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="proxyCount">0</div>
+                    <div class="stat-label">Proxies</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <h3>ATTACK CONSOLE <span style="float: right; font-size: 0.8rem;"><span id="console-line-count">0</span> lines</span></h3>
+            <div id="console"></div>
+            <div style="text-align: right; margin-top: 5px;">
+                <button id="clearConsoleBtn" style="padding: 5px 10px; font-size: 0.8rem;">Clear Console</button>
+                <button id="exportLogsBtn" style="padding: 5px 10px; font-size: 0.8rem;">Export Logs</button>
+            </div>
+        </div>
+        
+        <footer>
+            <strong>Note:</strong> Made by Lord Shadow.
+            <div style="margin-top: 5px; font-size: 0.7rem;">v3.1.4 | Shadow Systems</div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
